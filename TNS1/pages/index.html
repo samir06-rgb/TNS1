@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>True North Seafood — Atlantic Canada's Finest</title>
+  <meta name="description" content="Premium wild-caught seafood from Atlantic Canada, delivered fresh to your door." />
+  <link rel="icon" href="/cdn/shop/files/tns-logo_110x.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════
+       RESET & TOKENS
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    :root {
+      /* Palette */
+      --ink:        #0a1628;
+      --ink-80:     #1e304d;
+      --ink-60:     rgba(10,22,40,0.6);
+      --gold:       #c9a84c;
+      --gold-light: #e8c878;
+      --white:      #ffffff;
+      --surface:    #f7f9fc;
+      --border:     #e2e8f0;
+      --muted:      #64748b;
+      --green:      #16a34a;
+      --amber:      #d97706;
+      --red:        #dc2626;
+      /* Type */
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+      /* Misc */
+      --r-sm: 6px;
+      --r-md: 12px;
+      --r-lg: 20px;
+      --r-xl: 28px;
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,.14), 0 4px 12px rgba(0,0,0,.08);
+      --transition: 0.22s cubic-bezier(.4,0,.2,1);
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: var(--sans); border: none; background: none; }
+    ul { list-style: none; }
+
+    /* ═══════════════════════════════════════════
+       UTILITY
+    ═══════════════════════════════════════════ */
+    .u-container { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 56px); }
+    .u-label {
+      display: inline-block;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .u-h1 { font-family: var(--serif); font-size: clamp(36px, 6vw, 72px); font-weight: 800; line-height: 1.05; }
+    .u-h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 52px); font-weight: 700; line-height: 1.1; }
+    .u-h3 { font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; line-height: 1.2; }
+    .u-body { font-size: 15px; color: var(--muted); line-height: 1.75; }
+    .u-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 99px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+    }
+    .u-divider { width: 48px; height: 3px; background: var(--gold); border-radius: 2px; margin: 16px 0 24px; }
+
+    /* ═══════════════════════════════════════════
+       ANNOUNCEMENT BAR
+    ═══════════════════════════════════════════ */
+    .bar {
+      background: var(--ink);
+      padding: 11px 16px;
+      display: flex; justify-content: center; align-items: center; gap: 28px;
+      overflow: hidden;
+    }
+    .bar-scroll {
+      display: flex; gap: 48px;
+      white-space: nowrap;
+    }
+    .bar-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 500; color: rgba(255,255,255,.80);
+      letter-spacing: .03em;
+    }
+    .bar-item svg { color: var(--gold); flex-shrink: 0; }
+    .bar-item strong { color: var(--white); }
+
+    /* ═══════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════ */
+    .header {
+      position: sticky; top: 0; z-index: 900;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow var(--transition);
+    }
+    .header.scrolled { box-shadow: var(--shadow-md); }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px; gap: 32px;
+    }
+    .logo img { height: 44px; width: auto; display: block; }
+    .nav {
+      display: flex; align-items: center; gap: 2px;
+      flex: 1; justify-content: center;
+    }
+    .nav-link {
+      padding: 8px 14px;
+      font-size: 13px; font-weight: 500; color: var(--muted);
+      border-radius: var(--r-sm);
+      transition: color var(--transition), background var(--transition);
+      white-space: nowrap;
+    }
+    .nav-link:hover { color: var(--ink); background: var(--surface); }
+    .nav-link.active { color: var(--ink); font-weight: 600; }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .icon-btn {
+      width: 38px; height: 38px; border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink-80); transition: background var(--transition), color var(--transition);
+      position: relative;
+    }
+    .icon-btn:hover { background: var(--surface); }
+    .cart-dot {
+      position: absolute; top: 5px; right: 5px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--gold); border: 2px solid var(--white);
+      display: none;
+    }
+    .cart-dot.visible { display: block; }
+    .rewards-btn {
+      display: flex; align-items: center; gap: 7px;
+      padding: 8px 18px; border-radius: 99px;
+      background: var(--ink); color: var(--white);
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      transition: background var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+    .rewards-btn:hover { background: var(--ink-80); transform: translateY(-1px); }
+    .rewards-btn svg { color: var(--gold); }
+    .hamburger { display: none; width: 38px; height: 38px; border-radius: var(--r-sm); align-items: center; justify-content: center; color: var(--ink); }
+    .hamburger:hover { background: var(--surface); }
+
+    /* ═══════════════════════════════════════════
+       MOBILE DRAWER
+    ═══════════════════════════════════════════ */
+    .drawer-overlay {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(10,22,40,.6);
+      backdrop-filter: blur(4px);
+    }
+    .drawer-overlay.open { display: block; }
+    .drawer {
+      position: fixed; inset: 0 auto 0 0;
+      width: min(320px, 85vw);
+      background: var(--white);
+      display: flex; flex-direction: column;
+      transform: translateX(-100%);
+      transition: transform .36s cubic-bezier(.4,0,.2,1);
+      z-index: 2001;
+    }
+    .drawer-overlay.open .drawer { transform: translateX(0); }
+    .drawer-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+    }
+    .drawer-head img { height: 36px; }
+    .drawer-close { width: 32px; height: 32px; border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; color: var(--muted); }
+    .drawer-close:hover { background: var(--surface); color: var(--ink); }
+    .drawer-nav { flex: 1; padding: 16px 0; overflow-y: auto; }
+    .drawer-link {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 24px; font-size: 14px; font-weight: 500; color: var(--ink);
+      transition: background var(--transition);
+    }
+    .drawer-link:hover { background: var(--surface); }
+    .drawer-link svg { color: var(--gold); flex-shrink: 0; }
+    .drawer-foot { padding: 20px 24px; border-top: 1px solid var(--border); }
+    .drawer-rewards {
+      width: 100%; padding: 12px; border-radius: var(--r-md);
+      background: var(--ink); color: var(--white);
+      font-size: 13px; font-weight: 600; text-align: center;
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      height: clamp(520px, 90vh, 860px);
+      background: var(--ink); overflow: hidden;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg,
+        rgba(10,22,40,.88) 0%,
+        rgba(10,22,40,.55) 55%,
+        rgba(10,22,40,.15) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      height: 100%;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-bottom: clamp(48px, 8vh, 96px);
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px;
+    }
+    .hero-line { width: 32px; height: 2px; background: var(--gold); }
+    .hero-eyebrow span {
+      font-size: 12px; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(38px, 7vw, 84px);
+      font-weight: 800; line-height: 1.02;
+      color: var(--white);
+      max-width: 740px;
+      margin-bottom: 24px;
+    }
+    .hero p {
+      font-size: clamp(15px, 2vw, 18px);
+      color: rgba(255,255,255,.75);
+      max-width: 480px; line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 26px; border-radius: var(--r-sm);
+      font-size: 13px; font-weight: 600; letter-spacing: .04em;
+      transition: all var(--transition);
+    }
+    .btn-gold {
+      background: var(--gold); color: var(--white);
+      box-shadow: 0 2px 12px rgba(201,168,76,.35);
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,168,76,.4); }
+    .btn-ghost {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.3);
+      color: var(--white);
+      backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.55); }
+    .btn-ink {
+      background: var(--ink); color: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-ink:hover { background: var(--ink-80); transform: translateY(-1px); }
+    .btn-outline-ink {
+      border: 1.5px solid var(--border); color: var(--ink);
+      background: transparent;
+    }
+    .btn-outline-ink:hover { border-color: var(--ink); background: var(--surface); }
+    .hero-scroll {
+      position: absolute; right: clamp(24px, 4vw, 56px); bottom: clamp(36px, 6vh, 72px);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      z-index: 2;
+    }
+    .hero-scroll span {
+      font-size: 10px; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(255,255,255,.45);
+      writing-mode: vertical-rl;
+    }
+    .scroll-track { width: 1px; height: 48px; background: rgba(255,255,255,.2); position: relative; overflow: hidden; }
+    .scroll-thumb {
+      position: absolute; top: 0; left: 0;
+      width: 1px; height: 50%; background: var(--gold);
+      animation: scrollAnim 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollAnim {
+      0%   { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(200%); opacity: 0; }
+    }
+
+    /* ═══════════════════════════════════════════
+       TRUST STRIP
+    ═══════════════════════════════════════════ */
+    .trust {
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .trust-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      divide-x: 1px solid var(--border);
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 22px clamp(16px, 3vw, 36px);
+      border-right: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item:hover { background: var(--surface); }
+    .trust-icon {
+      width: 40px; height: 40px; border-radius: var(--r-sm);
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); flex-shrink: 0;
+    }
+    .trust-text { line-height: 1.3; }
+    .trust-text strong { font-size: 13px; font-weight: 600; color: var(--ink); display: block; }
+    .trust-text span { font-size: 12px; color: var(--muted); }
+
+    /* ═══════════════════════════════════════════
+       SECTION COMMON
+    ═══════════════════════════════════════════ */
+    .section { padding: clamp(64px, 10vw, 120px) 0; }
+    .section-alt { background: var(--surface); }
+    .section-head {
+      max-width: 580px;
+      margin-bottom: clamp(40px, 6vw, 64px);
+    }
+    .section-head.center {
+      margin: 0 auto clamp(40px, 6vw, 64px);
+      text-align: center;
+    }
+    .section-head h2 { color: var(--ink); }
+    .section-head p { color: var(--muted); font-size: 15px; line-height: 1.75; margin-top: 12px; }
+
+    /* ═══════════════════════════════════════════
+       PRODUCTS
+    ═══════════════════════════════════════════ */
+    .filter-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+      margin-bottom: clamp(28px, 4vw, 40px);
+    }
+    .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .ftab {
+      padding: 8px 16px; border-radius: 99px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      color: var(--muted); background: var(--surface);
+      border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .ftab:hover { color: var(--ink); border-color: var(--ink); }
+    .ftab.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .filter-right { display: flex; align-items: center; gap: 10px; }
+    .availability-toggle {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 500; color: var(--muted); cursor: pointer;
+    }
+    .toggle-switch {
+      width: 36px; height: 20px; border-radius: 99px;
+      background: var(--border); position: relative;
+      transition: background var(--transition);
+    }
+    .toggle-switch::after {
+      content: ''; position: absolute;
+      top: 2px; left: 2px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(0,0,0,.2);
+      transition: transform var(--transition);
+    }
+    .toggle-switch.on { background: var(--ink); }
+    .toggle-switch.on::after { transform: translateX(16px); }
+    .sort-select {
+      padding: 8px 12px; border-radius: var(--r-sm);
+      border: 1px solid var(--border); background: var(--white);
+      font-size: 12px; font-weight: 500; color: var(--ink);
+      font-family: var(--sans); outline: none; cursor: pointer;
+      transition: border-color var(--transition);
+    }
+    .sort-select:focus { border-color: var(--ink); }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: clamp(16px, 2.5vw, 28px);
+    }
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+    }
+    .product-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: transparent; }
+    .product-card.soldout { opacity: .6; }
+    .product-card.soldout:hover { transform: none; box-shadow: var(--shadow-sm); }
+
+    .product-media {
+      aspect-ratio: 4/3; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #0f2744 0%, #1a3a5c 100%);
+    }
+    .product-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+    }
+    .product-card:hover .product-img { transform: scale(1.06); }
+    .product-visual {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+    .product-visual svg { opacity: .14; color: var(--white); }
+    .product-visual-label {
+      font-size: 9px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(255,255,255,.22);
+      margin-top: 4px;
+    }
+    .product-media .badge-wrap {
+      position: absolute; top: 12px; left: 12px;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px; border-radius: 99px;
+      font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .badge-new    { background: #1d4ed8; color: #fff; }
+    .badge-sale   { background: var(--red); color: #fff; }
+    .badge-popular{ background: var(--gold); color: #fff; }
+    .badge-soldout-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,22,40,.72);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .badge-soldout-overlay span {
+      font-size: 13px; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: rgba(255,255,255,.85);
+      border: 1px solid rgba(255,255,255,.3);
+      padding: 8px 20px; border-radius: 99px;
+    }
+    .product-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .product-cat {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .product-name { font-size: 16px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+    .product-desc { font-size: 13px; color: var(--muted); line-height: 1.6; flex: 1; }
+    .stock-row { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+    .stock-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .dot-green  { background: var(--green); }
+    .dot-amber  { background: var(--amber); }
+    .dot-red    { background: var(--red); }
+    .stock-text { font-size: 11px; font-weight: 500; }
+    .stock-text.green { color: var(--green); }
+    .stock-text.amber { color: var(--amber); }
+    .stock-text.red   { color: var(--red); }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .price-wrap { display: flex; align-items: baseline; gap: 6px; }
+    .price { font-size: 20px; font-weight: 700; color: var(--ink); }
+    .price-was { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+    .add-btn {
+      padding: 9px 18px; border-radius: var(--r-sm);
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      background: var(--ink); color: var(--white);
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .add-btn:hover { background: var(--ink-80); transform: translateY(-1px); }
+    .notify-btn {
+      padding: 9px 18px; border-radius: var(--r-sm);
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      border: 1px solid var(--border); color: var(--muted);
+      background: transparent;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .notify-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .soldout-note {
+      font-size: 11px; color: var(--muted); text-align: center;
+      padding-top: 10px; border-top: 1px solid var(--border); margin-top: 6px;
+    }
+    .product-empty {
+      grid-column: 1 / -1; text-align: center;
+      padding: 72px 24px; color: var(--muted); font-size: 15px;
+    }
+
+    /* ═══════════════════════════════════════════
+       LOYALTY
+    ═══════════════════════════════════════════ */
+    .loyalty-section {
+      background: var(--ink);
+      padding: clamp(64px, 10vw, 120px) 0;
+    }
+    .loyalty-head {
+      text-align: center;
+      margin-bottom: clamp(48px, 7vw, 72px);
+    }
+    .loyalty-head h2 { color: var(--white); }
+    .loyalty-head p { color: rgba(255,255,255,.6); margin-top: 12px; font-size: 15px; max-width: 540px; }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(14px, 2vw, 24px);
+      margin-bottom: clamp(40px, 6vw, 60px);
+    }
+    .tier-card {
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--r-lg);
+      padding: clamp(24px, 3vw, 36px);
+      transition: border-color var(--transition), transform var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .tier-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,.02);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .tier-card:hover { border-color: rgba(255,255,255,.25); transform: translateY(-3px); }
+    .tier-card:hover::before { opacity: 1; }
+    .tier-card.featured { border-color: var(--gold); }
+    .tier-badge {
+      position: absolute; top: 0; right: 0;
+      background: var(--gold); color: var(--white);
+      font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 0 var(--r-lg) 0 var(--r-sm);
+    }
+    .tier-rank {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px;
+    }
+    .tier-icon {
+      width: 44px; height: 44px; border-radius: var(--r-sm);
+      background: rgba(255,255,255,.07);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+    }
+    .tier-name { font-size: 18px; font-weight: 700; color: var(--white); }
+    .tier-sub  { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 1px; }
+    .tier-perks {
+      display: flex; flex-direction: column; gap: 9px;
+      margin-bottom: 26px;
+    }
+    .perk {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.4;
+    }
+    .perk-check { color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+    .tier-cta {
+      width: 100%; padding: 11px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: var(--r-sm);
+      color: rgba(255,255,255,.8);
+      font-size: 12px; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase;
+      background: transparent;
+      transition: all var(--transition);
+    }
+    .tier-cta:hover, .tier-card.featured .tier-cta {
+      background: var(--gold); border-color: var(--gold); color: var(--white);
+    }
+
+    .points-panel {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--r-xl);
+      padding: clamp(28px, 4vw, 44px);
+      display: grid; grid-template-columns: 1fr auto;
+      gap: clamp(24px, 4vw, 48px); align-items: center;
+    }
+    .points-lead h3 { font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .points-lead p  { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.65; }
+    .earn-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .earn-cell {
+      background: rgba(255,255,255,.05);
+      border-radius: var(--r-md);
+      padding: 16px 12px; text-align: center;
+    }
+    .earn-num { font-size: 22px; font-weight: 800; color: var(--gold); line-height: 1; }
+    .earn-lbl { font-size: 10px; color: rgba(255,255,255,.45); margin-top: 5px; line-height: 1.3; }
+
+    /* ═══════════════════════════════════════════
+       SEAFOOD SCHOOL
+    ═══════════════════════════════════════════ */
+    .school-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: clamp(16px, 2.5vw, 28px);
+    }
+    .school-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+    }
+    .school-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: transparent; }
+    .school-media {
+      aspect-ratio: 16/9; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--ink) 0%, #1a3a5c 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .school-media img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+    }
+    .school-card:hover .school-media img { transform: scale(1.06); }
+    .school-media::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,22,40,.65) 0%, rgba(10,22,40,.1) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .school-level { z-index: 2; }
+    .school-media-icon { color: rgba(255,255,255,.12); z-index: 0; }
+    .school-level {
+      position: absolute; bottom: 12px; left: 12px;
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--white);
+      background: rgba(10,22,40,.7);
+      backdrop-filter: blur(8px);
+      padding: 4px 12px; border-radius: 99px;
+    }
+    .school-body { padding: 22px; }
+    .school-body h3 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+    .school-body p  { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+    .school-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--ink);
+      transition: gap var(--transition), color var(--transition);
+    }
+    .school-link:hover { color: var(--gold); gap: 10px; }
+
+    /* ═══════════════════════════════════════════
+       BRAND STORY SPLIT
+    ═══════════════════════════════════════════ */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: center; }
+    .split-img {
+      border-radius: var(--r-xl); overflow: hidden;
+      aspect-ratio: 4/3;
+      position: relative;
+    }
+    .split-img img { width: 100%; height: 100%; object-fit: cover; }
+    .split-img-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(10,22,40,.7) 0%, transparent 100%);
+      padding: 32px 28px 24px;
+    }
+    .img-stat-row { display: flex; gap: 28px; }
+    .img-stat-val { font-size: 32px; font-weight: 800; color: var(--white); line-height: 1; }
+    .img-stat-lbl { font-size: 11px; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .08em; margin-top: 3px; }
+    .split-body {}
+    .split-body h2 { color: var(--ink); margin-bottom: 20px; }
+    .split-body p { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
+
+    /* ═══════════════════════════════════════════
+       PILLARS
+    ═══════════════════════════════════════════ */
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(14px, 2vw, 24px);
+    }
+    .pillar {
+      padding: clamp(24px, 3vw, 36px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+    }
+    .pillar:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: transparent; }
+    .pillar-icon {
+      width: 48px; height: 48px; border-radius: var(--r-sm);
+      background: linear-gradient(135deg, var(--ink) 0%, var(--ink-80) 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .pillar h3 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .pillar p  { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ═══════════════════════════════════════════
+       NEWSLETTER
+    ═══════════════════════════════════════════ */
+    .newsletter {
+      background: var(--ink);
+      padding: clamp(64px, 10vw, 100px) 0;
+    }
+    .nl-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: center; }
+    .nl-left h2 { color: var(--white); margin-bottom: 12px; }
+    .nl-left p  { color: rgba(255,255,255,.6); font-size: 15px; line-height: 1.75; }
+    .nl-form { display: flex; gap: 10px; }
+    .nl-input {
+      flex: 1; padding: 14px 18px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--r-sm);
+      color: var(--white); font-size: 14px; font-family: var(--sans);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .nl-input::placeholder { color: rgba(255,255,255,.35); }
+    .nl-input:focus { border-color: var(--gold); }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    .footer {
+      background: #060e1a;
+      padding: clamp(56px, 8vw, 80px) 0 clamp(24px, 4vw, 36px);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: clamp(32px, 5vw, 56px);
+      margin-bottom: clamp(40px, 5vw, 56px);
+    }
+    .footer-brand img { height: 40px; margin-bottom: 18px; filter: brightness(0) invert(1); opacity: .85; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.75; max-width: 280px; }
+    .footer-col h4 {
+      font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--white); margin-bottom: 18px;
+    }
+    .footer-col a {
+      display: block; font-size: 13px; color: rgba(255,255,255,.45);
+      padding: 5px 0; transition: color var(--transition);
+    }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+    }
+    .footer-bottom span { font-size: 12px; color: rgba(255,255,255,.3); }
+    .socials { display: flex; gap: 8px; }
+    .social-btn {
+      width: 34px; height: 34px; border-radius: var(--r-sm);
+      border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.4);
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ═══════════════════════════════════════════
+       MODAL
+    ═══════════════════════════════════════════ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 5000;
+      background: rgba(10,22,40,.6);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border-radius: var(--r-xl);
+      padding: clamp(28px, 4vw, 40px);
+      width: min(460px, 92vw);
+      box-shadow: var(--shadow-lg);
+      animation: modalIn .28s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(.93) translateY(8px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+    .modal-head h3 { font-size: 20px; font-weight: 700; color: var(--ink); }
+    .modal-close-btn {
+      width: 30px; height: 30px; border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); flex-shrink: 0;
+    }
+    .modal-close-btn:hover { background: var(--surface); color: var(--ink); }
+    .modal p { font-size: 14px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+    .modal-input {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--border); border-radius: var(--r-sm);
+      font-size: 14px; font-family: var(--sans); color: var(--ink); outline: none;
+      transition: border-color var(--transition);
+      display: block; margin-bottom: 10px;
+    }
+    .modal-input:focus { border-color: var(--ink); }
+    .modal-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .modal-cancel {
+      flex: 1; padding: 12px;
+      border: 1.5px solid var(--border); border-radius: var(--r-sm);
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      background: transparent; transition: all var(--transition);
+    }
+    .modal-cancel:hover { border-color: var(--ink); color: var(--ink); }
+    .modal-submit {
+      flex: 2; padding: 12px;
+      background: var(--ink); color: var(--white);
+      border-radius: var(--r-sm);
+      font-size: 13px; font-weight: 600; letter-spacing: .04em;
+      transition: background var(--transition);
+    }
+    .modal-submit:hover { background: var(--ink-80); }
+
+    /* ═══════════════════════════════════════════
+       TOAST
+    ═══════════════════════════════════════════ */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: var(--ink); color: var(--white);
+      padding: 12px 22px; border-radius: 99px;
+      font-size: 13px; font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      opacity: 0; pointer-events: none;
+      transition: opacity .28s, transform .28s;
+      z-index: 9999; white-space: nowrap;
+      border-left: 3px solid var(--gold);
+    }
+    .toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Mobile cart bar */
+    .mobile-bar {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border);
+      padding: 12px 16px;
+      z-index: 800;
+    }
+    .mobile-bar-btn {
+      width: 100%; padding: 14px;
+      background: var(--ink); color: var(--white);
+      border-radius: var(--r-sm);
+      font-size: 14px; font-weight: 600; letter-spacing: .04em;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .tier-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .earn-grid { grid-template-columns: repeat(3, 1fr); }
+      .points-panel { grid-template-columns: 1fr; }
+      .pillar-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .nl-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 900px) {
+      .trust-inner { grid-template-columns: repeat(2, 1fr); }
+      .trust-item:nth-child(2) { border-right: none; }
+      .split { grid-template-columns: 1fr; }
+      .split-img { max-width: 560px; }
+      .tier-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto clamp(40px,6vw,60px); }
+    }
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .rewards-btn { display: none; }
+      .hamburger { display: flex; }
+      .mobile-bar { display: block; }
+      body { padding-bottom: 76px; }
+      .trust-inner { grid-template-columns: 1fr 1fr; }
+      .trust-item:nth-child(2) { border-right: 1px solid var(--border); }
+      .trust-item:nth-child(even) { border-right: none; }
+      .trust-item:nth-child(3),
+      .trust-item:nth-child(4) { border-top: 1px solid var(--border); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .nl-form { flex-direction: column; }
+      .pillar-grid { grid-template-columns: 1fr 1fr; }
+      .earn-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .trust-inner { grid-template-columns: 1fr; }
+      .trust-item { border-right: none !important; border-top: 1px solid var(--border); }
+      .trust-item:first-child { border-top: none; }
+      .pillar-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: 1fr; }
+      .earn-grid { grid-template-columns: repeat(2, 1fr); }
+      .filter-row { flex-direction: column; align-items: flex-start; }
+      .hero h1 { font-size: clamp(32px, 9vw, 48px); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="bar">
+  <div class="bar-scroll">
+    <div class="bar-item">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <span><strong>Free shipping</strong> on orders over $150</span>
+    </div>
+    <div class="bar-item">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Weekly fresh catches — <strong>Thursday delivery</strong></span>
+    </div>
+    <div class="bar-item">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>Seafood School — <strong>new classes available</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="u-container">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="True North Seafood Home">
+        <img src="/cdn/shop/files/tns-logo_140x@2x.png" alt="True North Seafood" />
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/" class="nav-link active">Home</a>
+        <a href="#products" class="nav-link">Shop</a>
+        <a href="#seafood-school" class="nav-link">Seafood School</a>
+        <a href="#sustainability" class="nav-link">Our Story</a>
+        <a href="/pages/contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="rewards-btn" onclick="document.getElementById('joinModal').classList.add('open')" aria-label="Rewards program">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Rewards
+        </button>
+        <button class="icon-btn" aria-label="Search">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Account">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+        <button class="icon-btn" id="cartToggle" aria-label="Cart">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-dot" id="cartDot"></span>
+        </button>
+        <button class="icon-btn hamburger" onclick="openDrawer()" aria-label="Open menu">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="handleOverlayClick(event)">
+  <div class="drawer" id="drawer">
+    <div class="drawer-head">
+      <img src="/cdn/shop/files/tns-logo_140x@2x.png" alt="True North Seafood" />
+      <button class="drawer-close" onclick="closeDrawer()" aria-label="Close menu">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="/" class="drawer-link" onclick="closeDrawer()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
+      <a href="#products" class="drawer-link" onclick="closeDrawer()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Shop Seafood
+      </a>
+      <a href="#loyalty" class="drawer-link" onclick="closeDrawer()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Rewards
+      </a>
+      <a href="#seafood-school" class="drawer-link" onclick="closeDrawer()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        Seafood School
+      </a>
+      <a href="#sustainability" class="drawer-link" onclick="closeDrawer()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Sustainability
+      </a>
+      <a href="/pages/contact" class="drawer-link">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Contact
+      </a>
+    </nav>
+    <div class="drawer-foot">
+      <button class="drawer-rewards" onclick="closeDrawer(); document.getElementById('joinModal').classList.add('open')">
+        Join True North Rewards — Free
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <img class="hero-img" src="/cdn/shop/files/IMG_5012_1800x.jpg" alt="True North Seafood Store" loading="eager" />
+  <div class="hero-overlay"></div>
+  <div class="hero-content u-container">
+    <div class="hero-eyebrow">
+      <div class="hero-line"></div>
+      <span>Atlantic Canada's Finest</span>
+    </div>
+    <h1>Seafood That Stays<br />True to the Ocean.</h1>
+    <p>Wild-caught, flash-frozen at peak freshness, and shipped directly from Dartmouth, Nova Scotia. No middlemen. Just the sea.</p>
+    <div class="hero-ctas">
+      <a href="#products" class="btn btn-gold">Shop Fresh Catch</a>
+      <a href="#seafood-school" class="btn btn-ghost">Seafood School</a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-track"><div class="scroll-thumb"></div></div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust">
+  <div class="u-container">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 18s2-3 7-3 9 3 9 3"/><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        </div>
+        <div class="trust-text"><strong>Wild-Caught</strong><span>Atlantic Canada waters</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 7 13 17 8 12 1 19"/><polyline points="17 7 23 7 23 13"/></svg>
+        </div>
+        <div class="trust-text"><strong>Flash-Frozen Fresh</strong><span>Peak quality locked in</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="trust-text"><strong>Flat-Rate $29.99</strong><span>Min. $150 order</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="trust-text"><strong>MSC Certified</strong><span>Sustainable harvesting</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="u-container">
+    <div class="section-head">
+      <span class="u-label">Fresh from the ocean</span>
+      <h2 class="u-h2">Shop Our Catch</h2>
+      <div class="u-divider"></div>
+      <p>Every product is traceable to source. Sold-out items are clearly flagged — with a one-click restock alert.</p>
+    </div>
+
+    <div class="filter-row">
+      <div class="filter-tabs" role="tablist">
+        <button class="ftab active" onclick="filterCat('all',this)" role="tab">All</button>
+        <button class="ftab" onclick="filterCat('lobster',this)" role="tab">Lobster</button>
+        <button class="ftab" onclick="filterCat('fish',this)" role="tab">Fish</button>
+        <button class="ftab" onclick="filterCat('shellfish',this)" role="tab">Shellfish</button>
+        <button class="ftab" onclick="filterCat('bundle',this)" role="tab">Bundles</button>
+      </div>
+      <div class="filter-right">
+        <label class="availability-toggle" id="availToggle">
+          <div class="toggle-switch" id="toggleSwitch"></div>
+          In stock only
+        </label>
+        <select class="sort-select" id="sortSel" onchange="renderProducts()">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid" role="list"></div>
+  </div>
+</section>
+
+<!-- LOYALTY -->
+<section class="loyalty-section" id="loyalty">
+  <div class="u-container">
+    <div class="loyalty-head">
+      <span class="u-label">True North Rewards</span>
+      <h2 class="u-h2" style="color:var(--white)">Earn on Every Order</h2>
+      <div class="u-divider" style="margin:16px auto 20px"></div>
+      <p>No blanket coupon codes. Personalized rewards based on what you buy, how often, and what you love — because repeat customers deserve better.</p>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-rank">
+          <div class="tier-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+          </div>
+          <div>
+            <div class="tier-name">First Mate</div>
+            <div class="tier-sub">0 – 499 pts</div>
+          </div>
+        </div>
+        <div class="tier-perks">
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 pt per $1 spent</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Birthday bonus: 50 pts</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Early restock access</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Members-only recipes</div>
+        </div>
+        <button class="tier-cta" onclick="document.getElementById('joinModal').classList.add('open')">Join Free</button>
+      </div>
+
+      <div class="tier-card featured">
+        <div class="tier-badge">Most Popular</div>
+        <div class="tier-rank">
+          <div class="tier-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div>
+            <div class="tier-name">Captain</div>
+            <div class="tier-sub">500 – 1,999 pts</div>
+          </div>
+        </div>
+        <div class="tier-perks">
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1.5 pts per $1 spent</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free shipping from $100</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority restock alerts</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Seasonal exclusives</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Seafood School: 15% off</div>
+        </div>
+        <button class="tier-cta" onclick="document.getElementById('joinModal').classList.add('open')">Get Rewarded</button>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-rank">
+          <div class="tier-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div>
+            <div class="tier-name">Admiral</div>
+            <div class="tier-sub">2,000+ pts</div>
+          </div>
+        </div>
+        <div class="tier-perks">
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>2 pts per $1 spent</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free shipping on all orders</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Private catch previews</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Personalized seafood boxes</div>
+          <div class="perk"><svg class="perk-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Seafood School: 25% off</div>
+        </div>
+        <button class="tier-cta" onclick="document.getElementById('joinModal').classList.add('open')">Become an Admiral</button>
+      </div>
+    </div>
+
+    <div class="points-panel">
+      <div class="points-lead">
+        <h3>How You Earn Points</h3>
+        <p>Every purchase, review, and referral earns points. Points never expire while your account is active.</p>
+      </div>
+      <div class="earn-grid">
+        <div class="earn-cell"><div class="earn-num">100</div><div class="earn-lbl">Sign up</div></div>
+        <div class="earn-cell"><div class="earn-num">1–2×</div><div class="earn-lbl">Per $1 spent</div></div>
+        <div class="earn-cell"><div class="earn-num">50</div><div class="earn-lbl">Birthday</div></div>
+        <div class="earn-cell"><div class="earn-num">25</div><div class="earn-lbl">Write a review</div></div>
+        <div class="earn-cell"><div class="earn-num">75</div><div class="earn-lbl">Refer a friend</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEAFOOD SCHOOL -->
+<section class="section section-alt" id="seafood-school">
+  <div class="u-container">
+    <div class="section-head">
+      <span class="u-label">Learn from the experts</span>
+      <h2 class="u-h2">Seafood School</h2>
+      <div class="u-divider"></div>
+      <p>From live tutorials to downloadable guides — we teach you to cook seafood the way it deserves to be cooked.</p>
+    </div>
+    <div class="school-grid">
+      <div class="school-card">
+        <div class="school-media">
+          <span class="school-level">Beginner</span>
+        </div>
+        <div class="school-body">
+          <h3>Lobster Basics: Ocean to Table</h3>
+          <p>How to cook, crack, and serve Atlantic lobster. Includes sourcing tips and wine pairings from our head chef.</p>
+          <a href="#" class="school-link">
+            Watch Free
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="school-card">
+        <div class="school-media">
+          <span class="school-level">Intermediate</span>
+        </div>
+        <div class="school-body">
+          <h3>Pan-Searing Halibut — Crispy Every Time</h3>
+          <p>Master the technique behind crispy-skin white fish. Chef-level results with a home kitchen setup.</p>
+          <a href="#" class="school-link">
+            Watch Free
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="school-card">
+        <div class="school-media">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Atlantic ocean fishing" loading="lazy" />
+          <span class="school-level">Deep Dive</span>
+        </div>
+        <div class="school-body">
+          <h3>How We Fish — Sustainability Behind the Scene</h3>
+          <p>Go behind the scenes with our captains. Understand MSC certification and what makes Atlantic seafood different.</p>
+          <a href="#sustainability" class="school-link">
+            Explore
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="school-card">
+        <div class="school-media">
+          <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=800&q=80" alt="Atlantic seafood chowder" loading="lazy" />
+          <span class="school-level">Recipe Guide</span>
+        </div>
+        <div class="school-body">
+          <h3>Atlantic Chowder Masterclass — PDF Included</h3>
+          <p>Our signature recipe with variations for scallops, haddock, and lobster. Downloadable guide included free.</p>
+          <a href="#" class="school-link">
+            Download Free
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section class="section" id="sustainability">
+  <div class="u-container">
+    <div class="split">
+      <div class="split-img">
+        <img src="/cdn/shop/files/IMG_5012_1800x.jpg" alt="True North Seafood storefront" loading="lazy" />
+        <div class="split-img-overlay">
+          <div class="img-stat-row">
+            <div><div class="img-stat-val">35+</div><div class="img-stat-lbl">Years Fishing</div></div>
+            <div><div class="img-stat-val">100%</div><div class="img-stat-lbl">MSC Certified</div></div>
+            <div><div class="img-stat-val">$0</div><div class="img-stat-lbl">Hidden Fees</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="split-body">
+        <span class="u-label">Our Commitment</span>
+        <h2 class="u-h2">Fishing Is in Our Blood.<br/>So Is Responsibility.</h2>
+        <div class="u-divider"></div>
+        <p>We've fished Atlantic Canadian waters for over three decades. We've watched the ocean change — and adapted. That's why we work exclusively with MSC-certified suppliers, practice minimum-bycatch methods, and never sell what the sea can't replace.</p>
+        <p>Every product ships with a full chain-of-custody record: vessel name, harvest date, and water origin. Because transparency isn't a feature — it's the standard.</p>
+        <a href="/pages/contact" class="btn btn-ink" style="margin-top:8px;">Visit Our Store</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="section section-alt">
+  <div class="u-container">
+    <div class="section-head center">
+      <span class="u-label">Why It Matters</span>
+      <h2 class="u-h2">Built on Sustainable Principles</h2>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 18s2-3 7-3 9 3 9 3"/><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        </div>
+        <h3>Ocean Health First</h3>
+        <p>We only fish species at sustainable population levels and rotate zones to allow natural recovery.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Zero-Waste Packaging</h3>
+        <p>All shipping boxes are curbside-recyclable. Ice packs are reusable or compostable — nothing to landfill.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Community-Owned</h3>
+        <p>We partner with small family-run fishing operations in Nova Scotia and PEI — keeping profits local.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Full Traceability</h3>
+        <p>Every product ships with a QR code linking to catch data, vessel name, and harvest date.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="u-container">
+    <div class="nl-inner">
+      <div class="nl-left">
+        <span class="u-label">Stay in the loop</span>
+        <h2 class="u-h2" style="color:var(--white)">Get the Catch of the Week</h2>
+        <div class="u-divider"></div>
+        <p>Weekly fresh-catch updates, Seafood School lessons, and members-only deals — no fluff, just good seafood content.</p>
+      </div>
+      <div>
+        <form class="nl-form" onsubmit="handleNewsletter(event)">
+          <input class="nl-input" type="email" placeholder="Your email address" required aria-label="Email address" />
+          <button type="submit" class="btn btn-gold">Subscribe</button>
+        </form>
+        <p style="font-size:12px;color:rgba(255,255,255,.35);margin-top:12px;">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="u-container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/cdn/shop/files/tns-logo_140x@2x.png" alt="True North Seafood" />
+        <p>Sustainably harvested seafood from the cold, clear waters of Atlantic Canada — delivered to your door since 1988.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#products">All Products</a>
+        <a href="#products">Lobster</a>
+        <a href="#products">Fish Fillets</a>
+        <a href="#products">Shellfish</a>
+        <a href="#products">Bundles</a>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="#seafood-school">Seafood School</a>
+        <a href="#sustainability">Our Story</a>
+        <a href="#sustainability">Sustainability</a>
+        <a href="/pages/contact">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Rewards</h4>
+        <a href="#loyalty">Join Rewards</a>
+        <a href="#loyalty">How It Works</a>
+        <a href="#loyalty">Redeem Points</a>
+        <a href="#">My Account</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 True North Seafood. Dartmouth, Nova Scotia.</span>
+      <div class="socials">
+        <a href="https://instagram.com" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+        </a>
+        <a href="https://facebook.com" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE CART BAR -->
+<div class="mobile-bar" id="mobileBar">
+  <button class="mobile-bar-btn" id="mobileCartBtn">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    View Cart — 0 items
+  </button>
+</div>
+
+<!-- NOTIFY MODAL -->
+<div class="modal-overlay" id="notifyModal" onclick="handleModalOverlay(event,'notifyModal')">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Restock Alert</h3>
+      <button class="modal-close-btn" onclick="closeModal('notifyModal')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <p id="notifyText">We'll email you the moment this item is available again.</p>
+    <input class="modal-input" type="email" id="notifyEmail" placeholder="Your email address" />
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeModal('notifyModal')">Cancel</button>
+      <button class="modal-submit" onclick="submitNotify()">Notify Me</button>
+    </div>
+  </div>
+</div>
+
+<!-- JOIN LOYALTY MODAL -->
+<div class="modal-overlay" id="joinModal" onclick="handleModalOverlay(event,'joinModal')">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Join True North Rewards</h3>
+      <button class="modal-close-btn" onclick="closeModal('joinModal')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <p>Create your free account and earn 100 welcome points instantly.</p>
+    <input class="modal-input" type="text" id="joinName" placeholder="Your name" />
+    <input class="modal-input" type="email" id="joinEmail" placeholder="Email address" />
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeModal('joinModal')">Cancel</button>
+      <button class="modal-submit" onclick="submitJoin()">Join — It's Free</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ══════════════════════════════════
+   DATA
+══════════════════════════════════ */
+/* Only confirmed seafood Unsplash IDs; others use the dark-navy gradient fallback */
+const IMG = {
+  lobster1: null,
+  lobster2: null,
+  lobster3: null,
+  halibut:  null,
+  haddock:  null,
+  salmon:   'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80',
+  shrimp:   'https://images.unsplash.com/photo-1565194025745-9e44eccc5dbb?auto=format&fit=crop&w=600&q=80',
+  scallops: null,
+  bundle1:  null,
+  bundle2:  null,
+  chowder:  'https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=600&q=80',
+  swordfish:null,
+};
+
+const PRODUCTS = [
+  { id:1,  cat:'lobster',   name:'Live Atlantic Lobster',        price:34.99,  badge:'popular', avail:true,  stock:'in',  count:48, desc:'Wild-caught from Gulf of St. Lawrence. 1–1.25 lb each.',          img:IMG.lobster1 },
+  { id:2,  cat:'lobster',   name:'Cooked Frozen Lobster Tails',  price:44.99,  badge:'new',     avail:true,  stock:'in',  count:32, desc:'Flash-frozen within hours of harvest. 4-pack, ready to eat.',      img:IMG.lobster2 },
+  { id:3,  cat:'lobster',   name:'Lobster Claw Meat (1 lb)',     price:64.99,  badge:null,      avail:false, stock:'out', count:0,  desc:'Premium claw and knuckle meat, fully cooked, vacuum-sealed.',      img:IMG.lobster3 },
+  { id:4,  cat:'fish',      name:'Atlantic Halibut Fillets',     price:28.99,  badge:'popular', avail:true,  stock:'in',  count:60, desc:'Wild-caught, skin-on, boneless. 1 lb portions. Superior texture.',  img:IMG.halibut },
+  { id:5,  cat:'fish',      name:'Nova Scotia Haddock',          price:19.99,  badge:'sale',    avail:true,  stock:'low', count:7,  desc:'Perfect for fish & chips or chowder. 1 lb, sustainably trawled.', was:24.99, img:IMG.haddock },
+  { id:6,  cat:'fish',      name:'Cold-Smoked Atlantic Salmon',  price:32.99,  badge:null,      avail:false, stock:'out', count:0,  desc:'Smoked in-house with Nova Scotia hardwood. 8 oz, hand-sliced.',    img:IMG.salmon },
+  { id:7,  cat:'shellfish', name:'Wild Northern Shrimp (2 lb)',  price:22.99,  badge:'new',     avail:true,  stock:'in',  count:45, desc:'Sweet, tender Gulf shrimp. Shell-on. Sustainably harvested.',      img:IMG.shrimp },
+  { id:8,  cat:'shellfish', name:'Atlantic Sea Scallops (1 lb)', price:38.99,  badge:'popular', avail:true,  stock:'in',  count:28, desc:'Dry-packed, never water-treated. 10–20 count per lb.',             img:IMG.scallops },
+  { id:9,  cat:'bundle',    name:"Captain's Bundle",             price:119.99, badge:'popular', avail:true,  stock:'in',  count:15, desc:'Lobster tails + haddock + sea scallops. Feeds 4–6 comfortably.',   img:IMG.bundle1 },
+  { id:10, cat:'bundle',    name:'Summer Grill Pack',            price:89.99,  badge:'sale',    avail:false, stock:'out', count:0,  desc:'Swordfish, jumbo shrimp, and salmon fillets. Perfect BBQ set.', was:109.99, img:IMG.bundle2 },
+  { id:11, cat:'bundle',    name:'Chowder Starter Kit',          price:54.99,  badge:null,      avail:true,  stock:'in',  count:22, desc:'Everything for Atlantic chowder: haddock, shrimp, scallops + guide.', img:IMG.chowder },
+  { id:12, cat:'fish',      name:'Swordfish Steaks (2-pack)',    price:36.99,  badge:null,      avail:true,  stock:'low', count:4,  desc:'Deep-water Atlantic swordfish. 6 oz steaks, skin-off, chef-quality.', img:IMG.swordfish },
+];
+
+/* ══════════════════════════════════
+   STATE
+══════════════════════════════════ */
+let activeCat = 'all';
+let stockOnly = false;
+let cart = [];
+
+/* ══════════════════════════════════
+   PRODUCT RENDERING
+══════════════════════════════════ */
+function getProducts() {
+  let list = PRODUCTS.filter(p => {
+    const cat = activeCat === 'all' || p.cat === activeCat;
+    const avail = !stockOnly || p.avail;
+    return cat && avail;
+  });
+  const sort = document.getElementById('sortSel')?.value || 'featured';
+  if (sort === 'price-asc') list.sort((a,b) => a.price - b.price);
+  if (sort === 'price-desc') list.sort((a,b) => b.price - a.price);
+  return list;
+}
+
+function stockColor(s) { return s==='in'?'green':s==='low'?'amber':'red'; }
+function stockText(p) {
+  if (p.stock==='in')  return `In Stock (${p.count})`;
+  if (p.stock==='low') return `Low Stock — ${p.count} left`;
+  return 'Out of Stock';
+}
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  const list = getProducts();
+  if (!list.length) {
+    grid.innerHTML = '<div class="product-empty">No products match your filter. Try selecting "All".</div>';
+    return;
+  }
+  grid.innerHTML = list.map(p => {
+    const badges = p.badge
+      ? `<div class="badge badge-${p.badge}">${p.badge==='popular'?'Popular':p.badge==='sale'?'Sale':p.badge==='new'?'New':p.badge}</div>`
+      : '';
+    const soldOutOverlay = !p.avail
+      ? `<div class="badge-soldout-overlay"><span>Temporarily Unavailable</span></div>`
+      : '';
+    const sc = stockColor(p.stock);
+    const dotClass = sc==='green'?'dot-green':sc==='amber'?'dot-amber':'dot-red';
+    const priceHTML = p.was
+      ? `<div class="price-wrap"><span class="price">$${p.price.toFixed(2)}</span><span class="price-was">$${p.was.toFixed(2)}</span></div>`
+      : `<div class="price-wrap"><span class="price">$${p.price.toFixed(2)}</span></div>`;
+    const actionBtn = p.avail
+      ? `<button class="add-btn" onclick="addToCart(${p.id},'${p.name.replace(/'/g,"\\'")}')" aria-label="Add ${p.name} to cart">Add to Cart</button>`
+      : `<button class="notify-btn" onclick="openNotify('${p.name.replace(/'/g,"\\'")}')">Notify Me</button>`;
+    const soldOutNote = !p.avail
+      ? `<div class="soldout-note">Get notified when this returns</div>`
+      : '';
+    const catIcons = {
+      lobster:   `<svg width="96" height="96" fill="none" stroke="currentColor" stroke-width=".8" viewBox="0 0 64 64"><ellipse cx="32" cy="38" rx="14" ry="10"/><path d="M18 38c-4 2-8 1-10-3M46 38c4 2 8 1 10-3"/><path d="M22 32c-2-6-1-12 4-16M42 32c2-6 1-12-4-16"/><circle cx="22" cy="20" r="3"/><circle cx="42" cy="20" r="3"/><path d="M26 48l-4 8M38 48l4 8"/><path d="M32 28v-8"/></svg>`,
+      fish:      `<svg width="96" height="96" fill="none" stroke="currentColor" stroke-width=".8" viewBox="0 0 64 64"><path d="M8 32c8-16 32-18 44-8-12 10-36 8-44 8z"/><path d="M8 32c8 16 32 18 44 8"/><path d="M52 24l6-8-6 16 6 8-6-16"/><circle cx="44" cy="29" r="2"/><path d="M20 32q4-4 8 0M32 32q4-4 8 0"/></svg>`,
+      shellfish: `<svg width="96" height="96" fill="none" stroke="currentColor" stroke-width=".8" viewBox="0 0 64 64"><path d="M32 12c-12 0-20 8-20 20s8 20 20 20 20-8 20-20S44 12 32 12z"/><path d="M32 12c0 12-8 20-20 20"/><path d="M32 12c0 12 8 20 20 20"/><path d="M16 38c4 6 10 10 16 10s12-4 16-10"/><line x1="32" y1="32" x2="32" y2="52"/></svg>`,
+      bundle:    `<svg width="96" height="96" fill="none" stroke="currentColor" stroke-width=".8" viewBox="0 0 64 64"><rect x="12" y="28" width="40" height="24" rx="3"/><path d="M12 28l8-14h24l8 14"/><line x1="32" y1="28" x2="32" y2="52"/><path d="M20 40h8M36 40h8M20 46h8M36 46h8"/></svg>`,
+    };
+    const fallbackIcon = !p.img ? `<div class="product-visual">${catIcons[p.cat]||catIcons.fish}<span class="product-visual-label">${p.cat}</span></div>` : '';
+    const imgHTML = p.img
+      ? `<img class="product-img" src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />`
+      : '';
+    return `<article class="product-card${!p.avail?' soldout':''}" role="listitem" data-id="${p.id}">
+      <div class="product-media">
+        ${imgHTML}
+        ${fallbackIcon}
+        <div class="badge-wrap">${badges}</div>
+        ${soldOutOverlay}
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${p.cat.charAt(0).toUpperCase()+p.cat.slice(1)}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="stock-row">
+          <span class="stock-dot ${dotClass}"></span>
+          <span class="stock-text ${sc}">${stockText(p)}</span>
+        </div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-footer">
+          ${priceHTML}
+          ${actionBtn}
+        </div>
+        ${soldOutNote}
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function filterCat(cat, btn) {
+  activeCat = cat;
+  document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts();
+}
+
+/* Availability toggle */
+document.getElementById('availToggle').addEventListener('click', () => {
+  stockOnly = !stockOnly;
+  document.getElementById('toggleSwitch').classList.toggle('on', stockOnly);
+  renderProducts();
+});
+
+/* ══════════════════════════════════
+   CART
+══════════════════════════════════ */
+function addToCart(id, name) {
+  const item = cart.find(i => i.id===id);
+  if (item) item.qty++; else cart.push({id,name,qty:1});
+  updateCart();
+  toast(`Added: ${name}`);
+}
+function updateCart() {
+  const total = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartDot').classList.toggle('visible', total>0);
+  document.getElementById('mobileCartBtn').textContent = `View Cart — ${total} item${total!==1?'s':''}`;
+}
+
+/* ══════════════════════════════════
+   MODALS
+══════════════════════════════════ */
+function openNotify(name) {
+  document.getElementById('notifyText').textContent = `We'll email you the moment "${name}" is back in stock.`;
+  document.getElementById('notifyModal').classList.add('open');
+}
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function handleModalOverlay(e, id) { if (e.target===document.getElementById(id)) closeModal(id); }
+
+function submitNotify() {
+  const email = document.getElementById('notifyEmail').value.trim();
+  if (!email || !email.includes('@')) { toast('Please enter a valid email address'); return; }
+  closeModal('notifyModal');
+  document.getElementById('notifyEmail').value = '';
+  toast("You'll be notified when it's back in stock");
+}
+function submitJoin() {
+  const name  = document.getElementById('joinName').value.trim();
+  const email = document.getElementById('joinEmail').value.trim();
+  if (!name || !email) { toast('Please fill in all fields'); return; }
+  closeModal('joinModal');
+  document.getElementById('joinName').value = '';
+  document.getElementById('joinEmail').value = '';
+  toast(`Welcome ${name}! You've earned 100 sign-up points`);
+}
+
+/* ══════════════════════════════════
+   DRAWER
+══════════════════════════════════ */
+function openDrawer()  { document.getElementById('drawerOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDrawer() { document.getElementById('drawerOverlay').classList.remove('open'); document.body.style.overflow=''; }
+function handleOverlayClick(e) { if (e.target===document.getElementById('drawerOverlay')) closeDrawer(); }
+
+/* ══════════════════════════════════
+   TOAST
+══════════════════════════════════ */
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('visible'), 3200);
+}
+
+/* ══════════════════════════════════
+   NEWSLETTER
+══════════════════════════════════ */
+function handleNewsletter(e) {
+  e.preventDefault();
+  e.target.reset();
+  toast("You're subscribed — first email arrives this Thursday");
+}
+
+/* ══════════════════════════════════
+   HEADER SCROLL
+══════════════════════════════════ */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* ══════════════════════════════════
+   SMOOTH ANCHOR LINKS
+══════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const sel = a.getAttribute('href');
+    if (sel.length < 2) return;
+    const target = document.querySelector(sel);
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+  });
+});
+
+/* ══════════════════════════════════
+   KEYBOARD CLOSE MODALS / DRAWER
+══════════════════════════════════ */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal('notifyModal');
+    closeModal('joinModal');
+    closeDrawer();
+  }
+});
+
+/* ══════════════════════════════════
+   INIT
+══════════════════════════════════ */
+renderProducts();
+</script>
+</body>
+</html>
